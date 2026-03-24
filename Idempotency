@@ -1,0 +1,13 @@
+**What is Idempotency?**  
+An operation is idempotent if performing it multiple times has the same effect on the server as performing it once.  
+
+**Idempotency Across HTTP Methods**  
+Under the RFC 9110 standard, HTTP methods are categorized as follows:  
+Inherent Idempotent Methods: These are designed to be safe or idempotent by the HTTP specification.
+GET / HEAD / OPTIONS: These are "safe" methods because they only retrieve data and do not change the server state.  
+PUT: This replaces a resource. Updating the same resource with the same data multiple times results in the same final state.  
+DELETE: Once a resource is deleted, subsequent identical delete requests have no further effect on the server state (even if the response code changes from 200 to 404).  
+
+Non-Idempotent Methods (by default):
+POST: Generally used to create new resources. Sending the same POST request twice may create two separate entries.  
+PATCH: Can be non-idempotent depending on the implementation (e.g., a PATCH request that "increments a value" will change the state every time it is called).  
